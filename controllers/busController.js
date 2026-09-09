@@ -1,10 +1,10 @@
-// Get All Busses
+// Get All Buses
 export const getAllBuses = (req, res) => {
   try {
     res.status(200).json({
       status: 'success',
       data: {
-        message: 'This will return all busses 🚌',
+        message: 'This will return all buses 🚌',
       },
     });
   } catch (err) {
