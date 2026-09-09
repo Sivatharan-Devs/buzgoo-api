@@ -1,21 +1,13 @@
 import './config.js';
+import mongoose from 'mongoose';
 import app from './app.js';
 
 const port = process.env.PORT || 3000;
 
-app.route('/').get((req, res) => {
-  try {
-    res.status(200).json({
-      status: 'success',
-      message: 'Hello From root route 😀',
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'page not found',
-      message: err.message,
-    });
-  }
-});
+const DB = process.env.DB_CONNECTION_STRING.replace('<APP_NAME>', process.env.APP_NAME)
+  .replace('<DB_USERNAME>', process.env.DB_USERNAME)
+  .replace('<DB_PASSWORD>', process.env.DB_PASSWORD);
+mongoose.connect(DB).then(() => console.log('DB connected successfully 🎉'));
 
 app.listen(port, () => {
   console.log('Hello 👋 From BuzGoo 🚌 ..');
