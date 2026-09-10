@@ -69,3 +69,7 @@ const busSchema = new mongoose.Schema(
     timestamps: true, // adds createdAt & updatedAt automatically
   }
 );
+
+const Bus = mongoose.model('Bus', busSchema);
+
+export default Bus;
