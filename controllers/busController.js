@@ -85,8 +85,9 @@ export const updateBus = async (req, res) => {
 };
 
 // Delete Bus
-export const deleteBus = (req, res) => {
+export const deleteBus = async (req, res) => {
   try {
+    await Bus.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: 'success',
       data: null,
