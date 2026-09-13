@@ -28,12 +28,13 @@ export const getAllBuses = async (req, res) => {
 };
 
 // Get certain Bus
-export const getBus = (req, res) => {
+export const getBus = async (req, res) => {
   try {
+    const bus = await Bus.findById(req.params.id);
     res.status(200).json({
       status: 'success',
       data: {
-        message: 'This will return a requested bus details 🚌',
+        bus,
       },
     });
   } catch (err) {
