@@ -64,12 +64,16 @@ export const createBus = async (req, res) => {
 };
 
 // Update Bus
-export const updateBus = (req, res) => {
+export const updateBus = async (req, res) => {
   try {
+    const bus = await Bus.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
     res.status(200).json({
       status: 'success',
       data: {
-        message: 'This will update existing bus',
+        bus,
       },
     });
   } catch (err) {
