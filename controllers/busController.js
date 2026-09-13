@@ -1,3 +1,5 @@
+import Bus from '../models/busModel.js';
+
 // Get All Buses
 export const getAllBuses = (req, res) => {
   try {
@@ -33,12 +35,13 @@ export const getBus = (req, res) => {
 };
 
 // Create Bus
-export const createBus = (req, res) => {
+export const createBus = async (req, res) => {
   try {
+    const bus = await Bus.create(req.body);
     res.status(201).json({
       status: 'success',
       data: {
-        message: 'This will create new bus',
+        bus,
       },
     });
   } catch (err) {
