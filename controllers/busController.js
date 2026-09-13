@@ -1,16 +1,26 @@
 import Bus from '../models/busModel.js';
+import QueryBuilder from '../utils/queryBuilder.js';
 
 // Get All Buses
-export const getAllBuses = (req, res) => {
+export const getAllBuses = async (req, res) => {
   try {
+    const busQuery = new QueryBuilder(Bus.find(), { ...req.query })
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    const buses = await busQuery.query;
+
     res.status(200).json({
       status: 'success',
+      results: buses.length,
       data: {
-        message: 'This will return all buses 🚌',
+        buses,
       },
     });
   } catch (err) {
-    res.status(404).json({
+    res.status(500).json({
       status: 'fail',
       message: err.message,
     });
